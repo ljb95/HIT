@@ -1,0 +1,164 @@
+@font-face {
+    font-family: ng;
+    src: url('NanumGothic.eot');
+    src: local(※), url('NanumGothic.woff') format('woff')    
+}
+
+/****** RESET ******/
+
+html, body {
+    margin: 0;
+    padding:0;
+    font-family: "굴림", "굴림체", NanumGothic, ng, sans-serif;
+    color: #333333;
+    font-size: 12px;    
+}
+
+ol, ul, li {
+    margin: 0; 
+    padding: 0;
+    display: inline;
+}
+
+img {
+    border: 0 !important;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: #333333;
+}
+
+#wrap {
+    width:100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+    min-width: 1024px;    
+}
+
+/**********************
+     Side Bar Area
+***********************/
+
+#sidebar {
+    width: 14%;
+    float: left;
+    background-color: #333;
+}
+h1.logo {
+    display: block;
+    width: 100%;
+    height: 60px;
+    float: left;
+    background-color: #018db8;
+}
+h1.logo img {
+    margin: 12px 0 0 12px;
+}
+div.menu_title {
+    width: 100%;
+    float: left;
+    padding: 18px 0;
+    background-color: #018db8;
+    color: #004e69;
+    border-bottom: 1px solid #1d8cac;
+}
+div.menu_title h2 {
+    display: block;
+    font-size: 18px;
+    color: #004e69;
+    width: 92%;
+    flot: left;
+    padding: 0 8%;
+}
+ul.submenu {
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+ul.submenu li {
+    display: inline-block;
+    background-color: #333;
+    margin: 0;
+    width: 92%;
+    padding: 3px 4%;
+}
+ul.submenu a:hover li {
+    background-color: white;
+}
+ul.submenu li.menutitle_selected {
+    background-color: #bfbfbf;
+    color: #666;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 12px 4%;
+}
+ul.submenu li.menutitle {
+    padding: 12px 4%;
+}
+ul.submenu li.menutitle a {
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+}
+
+ul.menulist a {
+    color: white;
+}
+ul.submenu li a.selected {
+    border-bottom: 1px solid white;
+}
+#nav {
+    width: 100%;
+    flaot:left;
+    padding: 20px 0 ;
+    background-color: #333;
+}
+select.menu_select {
+    width: 100%;
+    padding: 5px 0;
+    margin : 20px 0;
+    background-color: #7f7f7f;
+    color: white;
+    text-align: center;
+}
+#footer {
+    width:100%;
+    margin:0;
+    padding:0 0 20% 0;
+    background-color: #333;
+}
+p.copyright {
+    display: block;
+    padding: 0 4%;
+    color:white;
+    }
+    
+    #content {
+        width: 86%;
+        float: left;
+        background-color: white;
+        margin-left: 14%;
+        
+    }
+    #header {
+        width: 100%;
+        float: left;
+        height: 60px;
+        background-color: #569aaf;
+    }

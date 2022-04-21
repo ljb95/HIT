@@ -1,0 +1,10 @@
+#select_background img {
+    width: 180px;
+    height: auto;
+}
+#select_background div{
+    float:left;
+}
+.fl_right {
+    float: right;
+}

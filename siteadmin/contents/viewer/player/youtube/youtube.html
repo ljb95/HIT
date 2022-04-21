@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title> HTML5 플레이어 샘플</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<script src="jquery-1.10.2.js"></script>
+		<script src="youtube.js"></script>
+		<script>
+		$(document).ready(function() {
+				C_Init("ytplayer","480","320","oPEpt051xyM",30)
+		})
+			
+		</script>
+		
+
+		<div id="ytplayer"></div>
+		<br>
+		<input type ="button" value="play" onclick="C_Play()"> 
+
+		<input type ="button" value="stop" onclick="C_Stop()">
+
+		<input type ="button" value="pause" onclick="C_Pause()">
+
+		<input type ="button" value="60초로 이동" onclick="C_Move(60)">
+
+		<input type ="button" value="now time" onclick="alert(C_Seek())">
+
+		<input type ="button" value="all time" onclick="alert(C_duration())">
+	</body>
+</html>

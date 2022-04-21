@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/lmsdata/db" VERSION="20141105" COMMENT="XMLDB file for Moodle local/lmsdata"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+
+        <TABLE NAME="lmsdata_user" COMMENT="회원정보">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="회원번호(m_user->id)"/>
+                <FIELD NAME="eng_name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="영문이름"/>
+                <FIELD NAME="chn_name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="중문이름"/>
+                <FIELD NAME="usergroup_cd" TYPE="char" LENGTH="12" NOTNULL="true" SEQUENCE="false" COMMENT="회원구분코드 1. 학부생 2. 대학원생 3. 교원 4. 조교 5. 직원"/>
+                <FIELD NAME="usergroup" TYPE="char" LENGTH="12" NOTNULL="true" SEQUENCE="false" COMMENT="회원구분"/>
+                <FIELD NAME="b_temp" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="임시계정여부(1:임시,0:본회원)"/>
+                <FIELD NAME="b_mobile" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="핸드폰공개여부(1:공개,0:비공개)"/>
+                <FIELD NAME="b_email" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="이메일공개여부(1:공개,0:비공개)"/>
+                <FIELD NAME="univ_cd" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학교"/>
+                <FIELD NAME="univ" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학교"/>
+                <FIELD NAME="dept_cd" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학과코드"/>
+                <FIELD NAME="dept" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학과"/>
+                <FIELD NAME="major_cd" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="전공"/>
+                <FIELD NAME="major" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="전공"/>
+                <FIELD NAME="hyear" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="학년"/>
+                <FIELD NAME="nation_cd" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="국가코드"/>
+                <FIELD NAME="b_tel" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="연락처공개여부(1:공개,0:비공개)"/>
+                <FIELD NAME="b_univ" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="학교공개여부(1:공개,0:비공개)"/>
+                <FIELD NAME="b_major" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="전공공개여부(1:공개,0:비공개)"/>
+                <FIELD NAME="ehks" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학부/대학원생->소속학과(영)"/>
+                <FIELD NAME="edhs" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="학부/대학원생->소속대학(영)"/>
+                <FIELD NAME="domain" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="타대학 학점 교류생->대학코드"/>
+                <FIELD NAME="hyhg" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="타대학 학점 교류생->년도학기"/>
+                <FIELD NAME="persg" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="교직원"/>
+                <FIELD NAME="psosok" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="교직원->소속"/>
+                <FIELD NAME="sex" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="교직원->성별"/>
+                <FIELD NAME="menu_auth" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="관리자메뉴권한"/>
+                <FIELD NAME="day_tm_cd" TYPE="int" LENGTH="2" NOTNULL="false" N SEQUENCE="false" COMMENT="10:주 20:야" />
+                <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="1:재학 2:휴학 3:제적(자퇴등) 4:수료 5:졸업" />
+                <FIELD NAME="status_nm" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="상태이름" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+        <TABLE NAME="lmsdata_class" COMMENT="개설강의정보">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="무들강의번호(m_course->id)"/>
+                <FIELD NAME="subject_id" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="학정번호"/>
+                <FIELD NAME="category" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="범주(m_course_categories->id)"/>
+                <FIELD NAME="kor_lec_name" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="교과목명(한글)"/>
+                <FIELD NAME="eng_lec_name" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="교과목명(영문)"/>
+                <FIELD NAME="prof_userid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="교수자번호(m_user->id)"/>
+                <FIELD NAME="year" TYPE="char" LENGTH="4" NOTNULL="true" SEQUENCE="false" COMMENT="년도"/>
+                <FIELD NAME="term" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="학기"/>
+                <FIELD NAME="hakjum" TYPE="char" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="학점"/>
+                <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="강의시작일"/>
+                <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="강의종료일"/>
+                <FIELD NAME="timeregstart" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="수강신청시작일"/>
+                <FIELD NAME="timeregend" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="수강신청종료일"/>
+                <FIELD NAME="isnonformal" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="강의종류(0:교과,1:비교과,2:이러닝)"/>
+                <FIELD NAME="gubun" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="과목구분(1:국문,2:영문)"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="등록수정일"/>
+                <FIELD NAME="ohakkwa" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="학과명"/>
+                <FIELD NAME="ohakkwa_cd" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="학과명"/>
+                <FIELD NAME="domain" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="도메인"/>
+                <FIELD NAME="univ_type" TYPE="char" LENGTH="2" DEFAULT="0" NOTNULL="false" SEQUENCE="false" COMMENT="0:비정규과목 1:미래융합 비정규과목"/>
+                <FIELD NAME="certificate" TYPE="char" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="이수증발급여부 : 아니오(0), 예(1)"/>
+                <FIELD NAME="isreged" TYPE="char" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="수강신청가능여부 : 아니오(0), 예(1)"/>
+                <FIELD NAME="certiform" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="이수증양식번호"/>
+                <FIELD NAME="certiform_en" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="이수증양식영어번호"/>
+                <FIELD NAME="isopened" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="공개여부: 아니오(0), 예(1)"/>
+                <FIELD NAME="purpose" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="개설목적: 1 - 강좌, 2 - 커뮤니티"/>
+                <FIELD NAME="notice" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="알림사용  1:사용 0:미사용"/>
+                <FIELD NAME="background" TYPE="char" LENGTH="50"  DEFAULT="default.png" NOTNULL="false" SEQUENCE="false" COMMENT="백그라운드 이미지 local/okmanage/backgrounds/이미지명 -> 이미지명만 DB에 insert "/>
+                <FIELD NAME="useprogress" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="진도사용 1:사용 0:미사용 "/>
+                <FIELD NAME="onlineattendance" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="온라인출석부 사용 여부 1:사용 0:미사용"/>
+                <FIELD NAME="attendanceoption" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" COMMENT="온라인출석 인정 기준 1-인정진도율 이상 , 2-열람"/>
+                <FIELD NAME="offlineattendance" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="오프라인출석부 사용 여부 1:사용 0:미사용"/>
+                <FIELD NAME="gradesettingdate" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="성적 설정 변경일"/>
+                <FIELD NAME="bunban" TYPE="char" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="분반코드"/>
+                <FIELD NAME="tag" TYPE="char" LENGTH="300"  DEFAULT="" NOTNULL="false" SEQUENCE="false" COMMENT="태그"/>
+                <FIELD NAME="learningtime" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="학습시간"/>
+                <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="수료증 아이디"/>
+                <FIELD NAME="hyear" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="day_tm_cd" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+        <TABLE NAME="lmsdata_main" COMMENT="메인 갤러리">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="강의자명"/>
+                <FIELD NAME="type" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="mooc/ocx 구분(M:mooc,O:ocx)"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="강의명"/>
+                <FIELD NAME="shot" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="게시글 공개여부(1:개시,0:대기)"/>
+                <FIELD NAME="url" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" COMMENT="url"/>
+                <FIELD NAME="content" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        <TABLE NAME="lmsdata_sms" COMMENT="SMS데이터">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="보낸사람 고유값"/>
+                <FIELD NAME="schedule_type" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="전송타입(0:즉시발송, 1:예약발송"/>
+                <FIELD NAME="subject" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="제목"/>
+                <FIELD NAME="contents" TYPE="text" LENGTH="small" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="내용"/>
+                <FIELD NAME="sendtime" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="보낸시간"/>
+                <FIELD NAME="callback" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="발신자번호"/>
+                <FIELD NAME="sender" TYPE="char" LENGTH="50" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="보낸사람"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        <TABLE NAME="lmsdata_sms_data" COMMENT="SMS유저정보">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="sms" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="m_lmsdata_sms->id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="받는사람 고유값"/>
+                <FIELD NAME="fullname" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="받는사람이름"/>
+                <FIELD NAME="phone" TYPE="char" LENGTH="15" NOTNULL="true" DEFAULT=" " SEQUENCE="false" COMMENT="받는사람전화번호"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="siteadmin_loginfo" COMMENT="접속로그 저장테이블">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="식별번호"/>
+                <FIELD NAME="username" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="사번"/>
+                <FIELD NAME="ip" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="접속 아이피"/>
+                <FIELD NAME="mobile" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="M=휴대폰 C=컴퓨터"/>
+                <FIELD NAME="action" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="logged:로그인 logout:로그아웃"/>
+                <FIELD NAME="log_date" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="날짜"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="excel_user_period" COMMENT="엑셀등록사용자 사용기간 제한">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="식별번호"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="m_user->id"/>
+                <FIELD NAME="adminid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="(등록자)m_user->id"/>
+                <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="사용시작기간"/>
+                <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="사용종료기간"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="생성일"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="ipblock" COMMENT="Ipblock Table">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="description" TYPE="text" LENGTH="small" NOTNULL="true" DEFAULT=" " SEQUENCE="false" />
+                <FIELD NAME="ip" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=" " SEQUENCE="false" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+                <FIELD NAME="isused" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <!-- Main Menu Start -->
+                <TABLE NAME="main_menu" COMMENT="메뉴">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="depth" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="step" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="ispopup" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="하위메뉴 팝업여부를 위한 컬럼 1:링크 2:팝업"/>
+                <FIELD NAME="url" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="type" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="icon" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="http://fontawesome.io/icon/ 참조"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="생성자"/>
+                <FIELD NAME="edituserid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="수정자"/>
+                <FIELD NAME="required" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="isused" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="main_menu_name" COMMENT="이름관리">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="lang" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="menuid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="menuid" REFTABLE="main_menu" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="main_menu_apply" COMMENT="권한관리">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="usergroup" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="menuid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="menuid" REFTABLE="main_menu" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        
+        
+        
+        <TABLE NAME="menu_auth" COMMENT="어드민 메뉴 권한">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <!--FIELD NAME="name" TYPE="char" LENGTH="200" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="권한명(시리얼라이즈)" /-->
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="생성자"/>
+                <FIELD NAME="muserid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="수정자"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="생성일"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="수정일"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="menu_auth_name" COMMENT="이름관리">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="lang" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="authid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        
+        <TABLE NAME="admin_menu_apply" COMMENT="어드민 메뉴 권한관리">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="admingroup" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="menuid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        <TABLE NAME="admin_menu" COMMENT="관리자 메뉴">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="depth" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="step" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="ispopup" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="하위메뉴 팝업여부를 위한 컬럼 1:링크 2:팝업"/>
+                <FIELD NAME="url" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="type" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="생성자"/>
+                <FIELD NAME="edituserid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="수정자"/>
+                <FIELD NAME="required" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="isused" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+        
+        <TABLE NAME="admin_menu_name" COMMENT="이름관리"> 
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="lang" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="menuid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="foreign" TYPE="foreign" FIELDS="menuid" REFTABLE="main_menu" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <!-- Main Menu End -->
+        <TABLE NAME="course_tag" COMMENT="태그 관리"> 
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="tag_category" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="태그 분류"/>
+                <FIELD NAME="tagname" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" COMMENT="태그 이름"/>
+                <FIELD NAME="tag_depth" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="1:상위태그 2:하위태그"/>
+                <FIELD NAME="parent_tag" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="부모 태그"/>
+                <FIELD NAME="usable" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="사용여부 1:사용 2:미사용"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="태그생성일"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="태그수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        
+            <TABLE NAME="popup" COMMENT ="">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="isactive"/>
+            <FIELD NAME="isactive" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="title"/>
+            <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="isactive" NEXT="url"/>
+            <FIELD NAME="type" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="title" NEXT="url" />
+            <FIELD NAME="url" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="type" NEXT="timedue"/>
+            <FIELD NAME="timedue" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="url" NEXT="timeavailable"/>
+            <FIELD NAME="timeavailable" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timedue" NEXT="popupx"/>
+            
+            <FIELD NAME="popupx" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timeavailable" NEXT="popupy"/>
+            <FIELD NAME="popupy" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="popupx" NEXT="popupwidth"/>
+            <FIELD NAME="popupwidth" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="popupy" NEXT="popupheight"/>
+            <FIELD NAME="popupheight" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="popupwidth" NEXT="availablescroll"/>
+            <FIELD NAME="availablescroll" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="popupheight" NEXT="cookieday"/>
+            <FIELD NAME="cookieday" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="availablescroll" NEXT="description"/>
+
+            <FIELD NAME="description" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="cookieday" NEXT="descriptionformat"/>
+            <FIELD NAME="descriptionformat" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="description" NEXT="descriptiontrust"/>
+            <FIELD NAME="descriptiontrust" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="descriptionformat" NEXT="user"/>
+            
+            <FIELD NAME="user" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="descriptiontrust" NEXT="timecreated"/>
+            <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="user" NEXT="timemodified"/>
+            <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="assign_share" COMMENT="과제 공개"> 
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+                <FIELD NAME="assignid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="assign course_modules id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="사용자 고유번호"/>
+                <FIELD NAME="shared" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="1:공개 0:비공개"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="forum_like" COMMENT="포럼 좋아요"> 
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"  COMMENT="id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="user table id"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"   COMMENT="courseid"/>
+                <FIELD NAME="forum" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"  COMMENT="forum id"/>
+                <FIELD NAME="discussion" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"  COMMENT="forum_discussions id"/>
+                <FIELD NAME="post" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"  COMMENT="forum_post id"/>  
+                <FIELD NAME="likey" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="1:좋아요 0:좋아요 취소"/>
+              </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="haksa_auto_sync" COMMENT="학사 자동동기화 시간">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="year" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="년도" />
+                <FIELD NAME="term" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="학기" />
+                <FIELD NAME="hour" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="학기" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록시간" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

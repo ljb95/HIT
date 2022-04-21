@@ -1,0 +1,462 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2016. 11. 14, 오후 6:17:44
+    Author     : hyensu
+*/
+
+
+div.attendance-filter{
+    width: 100%;
+    text-align: left;
+}
+
+div.attendance-filter .select-perpage {
+    float: left;
+}
+
+div.attendance-filter .excell-button {
+    float: right;
+}
+
+div.attendance-filter .excell-button input[type="button"] {
+    margin: 0px !important;
+}
+
+table.setting-course thead{
+    padding: 20px 20px 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+table.setting-course thead th{
+    width: 30%;
+    padding-bottom: 23px;
+}
+
+table.setting-course thead select{
+    width: 30%;
+    margin-top: 10px;
+}
+
+table.setting-section .section-date{
+    width: 80px;
+}
+
+table.setting-section .section-scope{
+    width: 50px;
+    text-align: center;
+    margin-bottom : 0px;
+}
+
+table.setting-section .section-time{
+    letter-spacing: 1px;
+}
+
+ .red{
+    color: #ee4886 !important;
+}
+.left{float: left;}
+.right{float: right;}
+
+/*테이블스타일*/
+table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.table-borderer{
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.table.margin-top{margin-top: 10px;}
+.table a{color: #333;}
+.table {
+    margin-top: 0;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 14px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0px;
+}
+.table.margin-bottom{margin-bottom: 20px;}
+.table.no-top-border{border-top: 0;}
+.table > tbody > tr > th {
+    padding-right: 15px;
+    text-align: right;
+    background-color: #f4f4f4;
+    vertical-align: middle;
+    padding: 5px;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table > thead > tr > th {
+    text-align: center;
+    border-bottom-width: 1px;
+    background-color: #f4f4f4;
+    vertical-align: middle;
+    color: #333;
+    font-weight: normal;
+    font-weight: bold;
+}
+.table-borderer > thead > tr > th
+, .table-borderer > tbody > tr > th
+, .table-borderer > tfoot > tr > th {
+    border-left-width: 0;
+    border-right-color: #dfdfdf;
+    white-space: nowrap;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table-borderer > thead > tr > td
+, .table-borderer > tbody > tr > td
+, .table-borderer > tfoot > tr > td {
+    border-left-width: 0;
+    border-right-color: #f4f4f4;
+    color: #333;
+    white-space: nowrap;
+}
+.table > thead > tr > th, .table > tbody > tr > th
+, .table > tfoot > tr > th, .table > thead > tr > td
+, .table > tbody > tr > td
+, .table > tfoot > tr > td {
+    border-top-color: #dfdfdf;
+     padding: 5px;
+}
+.table-borderer > thead > tr > th
+, .table-borderer > tbody > tr > th
+, .table-borderer > tfoot > tr > th
+, .table-borderer > thead > tr > td, .table-borderer > tbody > tr > td
+, .table-borderer > tfoot > tr > td {
+    border: 1px solid #ddd;
+}
+.table-condensed > thead > tr > th
+, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th
+, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td
+, .table-condensed > tfoot > tr > td {
+    padding: 5px;
+}
+.table > thead > tr > th, .table > tbody > tr > th
+, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td
+, .table > tfoot > tr > td {
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.text-right {
+    text-align: right !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-left {
+    text-align: left !important;
+    text-indent: 10px;
+}
+.text-bold{
+    font-weight: bold;
+}
+
+.table th.result
+, .table tr.result th
+, .table tr.result td
+, .table td.result{
+background: #f9f9f9;
+color: #ee4886;
+}
+/*테이블스타일*/
+
+
+   
+form{margin:0}
+.search_area{
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+.search_area .search_name{
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    line-height: 30px;
+    padding: 0 10px;
+    width: 30%;
+}
+
+.search_area input[type=submit]{
+    background: #9a9a9a;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 10px;
+    min-width: 60px;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-shadow:none;
+    margin-bottom: 0px;
+}
+.explain{
+    margin-top: 20px;
+    line-height: 20px;
+}
+
+.buttons{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.buttons select{
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.buttons input{
+    margin-top: 10px;
+}
+input.btn_style01
+, input.btn_style01:hover{
+    line-height: 30px;
+    height: 30px;
+    border: 0;
+    background: #52719d;
+    color: #fff;
+    padding: 0 10px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-sizing: border-box;
+    text-shadow: none;
+    margin-bottom: 0;
+}
+input.btn_style02
+, input.btn_style02:hover{
+    line-height: 30px;
+    height: 30px;
+    border: 0;
+    background: #5c6763;
+    color: #fff;
+    padding: 0 10px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-sizing: border-box;
+    text-shadow: none;
+    margin-bottom: 0;
+}
+
+
+.board-breadcrumbs{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+.board-breadcrumbs a{
+    text-decoration: none;
+    color: #333
+}
+.board-breadcrumbs ul{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+/*.board-breadcrumbs li{
+    display: inline-block;
+    list-style: none;
+    padding: 0 5px;
+}*/
+.board-breadcrumbs li.current a{
+    color: #5d9cec;
+}
+/*.board-nav-prev
+, .board-nav-next{
+    color: #555;
+    border: 1px solid #E8E8E8;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+}*/
+.board-nav-prev a
+, .board-nav-next a{
+    color: #555;    
+    vertical-align: top;
+}
+@media screen and (max-width:720px){
+   .search_area{
+        padding: 20px
+   }
+   .search_area .search_name{
+       width: 50%
+   }
+  .buttons .right{
+    float: left;
+   } 
+}
+
+
+/*attendance_setup.php*/
+
+form[name="form_setup"]{
+    padding: 20px 20px 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+form[name="form_setup"] .right{
+    text-align: right;
+}
+form[name="form_setup"] .options .title{
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+
+div .user_info{
+    display: block;
+    border: 1px solid #ddd;
+}
+
+form[name="form_setup"] input[name="itemname"]{
+    width: 10%;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+}
+
+form[name="form_setup"] select{
+    width: 11%;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+}
+
+form[name="form_setup"] .search-text{
+    width: 20%;
+}
+
+form[name="form_setup"] .auto-attendance-button{
+    margin: 0px;
+}
+.guide {
+    height: auto;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 10px
+}
+.manage-status-submit .perpage{
+   float: left;
+    width: 60%;
+}
+.manage-status-submit .perpage select{
+    width: 30%;
+}
+
+.manage-status-submit #status{
+    float: right;
+    width: 40%;
+    text-align: right;
+    margin: 0;
+}
+
+#viewtext {
+    display: none;
+}
+
+#viewcode {
+    display: none;
+}
+
+#viewtimer {
+    display: none;
+}
+
+table.margin_bottom_40{
+    margin-bottom: 40px !important;
+}
+
+form[name="form_check"]{
+    text-align: center;
+}
+
+#table_check_info td{
+    text-align: left;
+    margin-left: 10px;
+}
+#table_check_info td input{
+    margin-bottom: 0px;
+}
+
+form[name="form_realize"] span.realize {
+   display: inline-block;
+   border: 1px solid #ddd;
+   padding: 20px;
+   margin: 10px 10px 0 0;
+   border-radius: 6px;
+}
+
+form[name="form_realize"] .mod-icon {
+   width: 40px;
+   height: 40px;
+}
+
+form[name="form_realize"] h4 {
+    padding-bottom: 20px;
+}
+
+.ui-spinner-input {
+    border: none !important;
+    background: none;
+    color: inherit !important;
+    padding: .222em 0;
+    margin: .2em 0;
+    vertical-align: middle !important;
+    margin-left: .4em;
+    margin-right: 2em;
+}
+
+input.clockpicker {
+    width: 60px;
+}
+
+table input.batchset-date{
+    width: 40px ; 
+}
+
+table input.batchset-progress{
+    width: 40px; 
+}
+
+.clockpicker-popover div.popover-title span {
+        float: none !important;
+        margin-left: 0px !important;
+}
+
+table input.datepicker {
+    width: 90px !important; 
+} 
+
+.display-none {
+    display: none !important;
+}

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/online_attendance/db" VERSION="20131122" COMMENT="XMLDB file for Moodle local/online_attendance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="local_onattend" COMMENT="온라인 출석부">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="코스 id"/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="grade_items 테이블의 id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" DEFAULT="0" NOTNULL="true" SEQUENCE="false" COMMENT="user id"/>
+                <FIELD NAME="latesubtract" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="지각 대 결석비율, 지각/비율 = 결석"/>
+                <FIELD NAME="absentsubtract" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="결석차감"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_onattend_cm_batchset" COMMENT="온라인 출석부 Activity 일괄설정">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="코스 id"/>
+                <FIELD NAME="modname" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="module 이름"/>
+                <FIELD NAME="startratio" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="주차별 시작일 일괄설정 값, 주차 시작일에서의 +/- 일비율, 초단위로넣음"/>
+                <FIELD NAME="attendratio" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="주차별 출석일 일괄설정 값, 주차 시작일에서의 +/- 일비율, 초단위로넣음"/>
+                <FIELD NAME="aprogress" TYPE="int" LENGTH="5" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="출석 인정 진도율"/>
+                <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" DEFAULT="1" COMMENT="강의에서 이 활동을 출석부에 사용할것인지 여부 활성(1), 비활성(0)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="만들어진시간"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_onattend_cm_set" COMMENT="온라인 출석부 activity별 설정">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="코스 id"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="course_module 테이블 id"/>
+                <FIELD NAME="modname" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="module 이름"/>
+                <FIELD NAME="section" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="activity가 생성되어있는 주차, course_sections 의 section"/>
+                <FIELD NAME="approval" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" COMMENT="출석 인정 체크(0 : 안함, 1 : 인정함)"/>
+                <FIELD NAME="starttime" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="출석체크 시작시간 unixtime"/>
+                <FIELD NAME="attendtime" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="출석인정 종료시간 unixtime"/>
+                <FIELD NAME="aprogress" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" DEFAULT="0" COMMENT="출석 범위, 값 이상 진도율(0~100)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="만들어진시간"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_onattend_week_status" COMMENT="온라인 출석부 section별 사용자 출석 현황">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="courseid"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="코스 id"/>
+                <FIELD NAME="section" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="acitivity가 생성되어있는 주차, course_sections 의 section "/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="출결 userid"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" COMMENT="상태(0:결석, 1:출석, 2:지각, 3:초기상태)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="만들어진시간"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="변경된시간"/>
+                <FIELD NAME="fixstatus" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="교수가 status 값을 변경했는지 여부 0 or 1"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_onattend_status" COMMENT="온라인 출석부 activity별 사용자 출석 현황">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="courseid"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="코스 id"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="course_module 테이블 id"/>
+                <FIELD NAME="modname" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="module 이름"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="출결 userid"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" COMMENT="상태(0:결석, 1:출석,2:지각)"/>
+                <FIELD NAME="aprogress" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="시작 ~ 출석기간진도율, 시간체크유형 activity가 아닐경우 결석(0), 지각(50), 출석(100)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="만들어진시간"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_onattend_log" COMMENT="온라인 출석부 로그" >
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="course id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="user id"/>
+                <FIELD NAME="target" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="문자열 : course, activity, user"/>
+                <FIELD NAME="action" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="변경내용 : created, update, deleted"/>
+                <FIELD NAME="objecttable" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="변경된 테이블명"/>
+                <FIELD NAME="objectid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="변경값의 테이블 id값"/>
+                <FIELD NAME="objectdata" TYPE="char" LENGTH="500" NOTNULL="false" SEQUENCE="false" COMMENT="변경된 값"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="만들어진시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>

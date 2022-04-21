@@ -1,0 +1,13 @@
+table.competence_total td.left{
+    text-align: left;
+}
+
+table.competence_total td.depth_1{
+    padding-left: 30px;
+}
+table.competence_total td.depth_2{
+    padding-left: 60px;
+}
+table.competence_total td.depth_3{
+    padding-left: 90px;
+}

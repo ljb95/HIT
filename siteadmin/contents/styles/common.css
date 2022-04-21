@@ -1,0 +1,702 @@
+@charset "utf-8";
+@import "normalize.css";
+@font-face {
+     font-family: ng;
+     src: url('NanumGothic.eot');
+     src: local(※), url('NanumGothic.woff') format('woff')
+}
+
+/*************************************
+    Scrollbar
+*************************************/
+.ps-container .ps-scrollbar-x-rail {
+    position: absolute; /* please don't change 'position' */
+    bottom: 0px; /* there must be 'bottom' for ps-scrollbar-x-rail */
+    height: 4px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -o-transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    -moz-transition: background-color .2s linear, opacity .2s linear;
+    transition: background-color .2s linear, opacity .2s linear;
+    z-index: 7000;
+}
+
+.ps-container:hover .ps-scrollbar-x-rail,
+.ps-container.hover .ps-scrollbar-x-rail {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.ps-container .ps-scrollbar-x-rail:hover,
+.ps-container .ps-scrollbar-x-rail.hover {
+    background-color: #eee;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+.ps-container .ps-scrollbar-x-rail.in-scrolling {
+    background-color: #eee;
+    opacity: 0.4;
+    filter: alpha(opacity=90);
+}
+
+.ps-container .ps-scrollbar-y-rail {
+    position: absolute; /* please don't change 'position' */
+    right: 0px; /* there must be 'right' for ps-scrollbar-y-rail */
+    width: 4px;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+    -o-transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    -moz-transition: background-color .2s linear, opacity .2s linear;
+    transition: background-color .2s linear, opacity .2s linear;
+    z-index: 7000;
+}
+
+.ps-container:hover .ps-scrollbar-y-rail,
+.ps-container.hover .ps-scrollbar-y-rail {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.ps-container .ps-scrollbar-y-rail:hover,
+.ps-container .ps-scrollbar-y-rail.hover {
+    background-color: #676767;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+.ps-container .ps-scrollbar-y-rail.in-scrolling {
+    background-color: #676767;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+.ps-container .ps-scrollbar-x {
+    position: absolute; /* please don't change 'position' */
+    bottom: 0; /* there must be 'bottom' for ps-scrollbar-x */
+    height: 4px;
+    background-color: #aaa;
+    -o-transition: background-color .2s linear;
+    -webkit-transition: background-color.2s linear;
+    -moz-transition: background-color .2s linear;
+    transition: background-color .2s linear;
+}
+
+.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x,
+.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x {
+    background-color: #999;
+}
+
+.ps-container .ps-scrollbar-y {
+    position: absolute; /* please don't change 'position' */
+    right: 0; /* there must be 'right' for ps-scrollbar-y */
+    width: 4px;
+    background-color: #232323;
+    -o-transition: background-color .2s linear;
+    -webkit-transition: background-color.2s linear;
+    -moz-transition: background-color .2s linear;
+    transition: background-color .2s linear;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,
+.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y {
+    background-color: #232323;
+}
+
+/*************************************
+    Reset CSS
+*************************************/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    float:left;
+    width:100%;
+    height:100%;
+    font-family: '나눔고딕', NanumGothic, ng, sans-serif;
+    font-size: 13px;
+}
+/* size  */ 
+.w80 { width: 80%; }
+.w100 { width: 100%;}
+.h30 { height: 30px; }
+.h100 { height: 100px; }
+/* float */
+.fl { float:left; }
+.fr { float:right; }
+/* form */
+.gray-form {
+    background-color: #656c7e;
+    border:none;
+    color:#fff;
+}
+select.gray-form {
+    padding:4px 25px 4px 10px;
+}
+/* h */ 
+h1 , h2 , h3 ,h4 , h5 ,h6 {
+    padding:0;
+    margin:0;
+}
+
+/*************************************
+    Basic Layout
+*************************************/
+
+/* text */
+a {
+    color: #333;
+    text-decoration: none;
+}
+.used {
+    background-color: #666b70;
+}
+.hx_hide{position: absolute; overflow: hidden; width: 1px; height: 1px; font-size: 0; line-height: 0;}
+caption{display: none;}
+
+/* index page start */ 
+#page {
+    position: relative;
+    width: 100%;
+    height:100%;
+    overflow: hidden;
+    float: left;
+    margin :0;
+    padding: 0;
+}
+#page-header {
+    position: relative;
+    top:0;
+    left:0;
+    padding:0;
+    height:44px;
+    opacity: 0.95;
+}
+#site-logo {
+    float:left;
+    width: 194px;
+    height: 44px;
+    padding-left:10px;
+    line-height: 44px;
+    background-color: #5d9cec;
+}
+#header-userinfo {
+    float:right;
+    width: calc(100% - 214px);
+    height: 44px;
+    line-height: 44px;
+    background: #5d9cec;
+    font-size: 13px;
+    color: #eee;
+    text-align: right;
+    padding-right: 10px;
+}
+.user-name {
+    font-size:13px;
+    font-weight: bold;
+    letter-spacing: -0.6px;
+    text-align: right;
+    color: #fff;
+}
+
+#header-userinfo span{
+    margin-right: 10px;
+}
+#header-userinfo span a{
+    color: #eee;
+}
+#page-sidebar {
+    width: 204px;
+    height: 100%;
+    float: left;
+    margin : 0;
+    padding : 0;
+    background-color: #383d40;
+    overflow: hidden;
+}
+#page-sidebar #page-sidebar-list {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    list-style: none;
+    background-color: #383d40;
+    border-bottom: 1px solid #666b70;
+}
+#page-sidebar > .content > ul > li > .colun > a {
+    display: block;
+    font-size:120%;
+    color: #fafafa;
+    margin-left:20%;
+    padding: 18px 0;
+}
+#page-sidebar-btn {
+     float:left;
+     margin-top: 20px;
+     padding:0;
+     list-style: none;
+     overflow-x: hidden;
+}
+#page-sidebar-btn button {
+    width: 180px;
+    height: 35px;
+    color: #fafafa;
+    cursor: pointer;
+    background-color: #656c7e;
+    border-radius: 8px;
+    margin:6px 10px;
+    border:0;
+    text-align: center;
+}
+#page-sidebar-footer {
+    width: 204px;
+    padding: 10px 0 5px 0;
+    float: left;
+    background-color: #313639;
+    position: fixed;
+    bottom:0;
+    left:0;
+}
+
+span.copyright {
+    float:left;
+    font-size:11px;
+    color:#999;
+    display: block;
+    margin:10px 0 5px 0;   
+}
+.sidebar-inner {
+    padding : 0 3%;
+}
+#page-content {
+    position: fixed;
+    left:204px;
+    height: 100%;
+    width: calc(100% - 204px);
+    overflow: auto;
+}
+#page-content-bar {
+   
+    height:52px;
+    background: #f2f2f2;
+    box-shadow: 0 1px 3px #afafaf;
+    -webkit-box-shadow: 0 1px 3px #afafaf;
+    -moz-box-shadow: 0 1px 3px #afafaf;
+    opacity: 0.9;
+    font-size: 14px;
+}
+#page-content-bar span{
+    float:left;
+    margin-top:8px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+#page-content-bar span.icons{
+    float:right;
+    padding: 3px 20px !important;
+}
+#page-content-bar span.icons img{
+   margin-left: 8px;
+}
+#content-region {
+    float:left;
+    width:96%;
+    padding:20px 2% 80px 2%;
+    background-image: url(../images/sos.png);
+    min-height: 100%;
+}
+.sub-content-region {
+    float:left;
+    box-shadow: 0 1px 3px #afafaf;
+    -webkit-box-shadow: 0 1px 3px #afafaf;
+    -moz-box-shadow: 0 1px 3px #afafaf;
+    margin : 0;
+    border-radius: 2px;
+    padding : 0;
+    background: #fff;
+    width:48%;
+    font-size: 13px;
+    position: relative;
+}
+#sub-content-region2 {
+    margin-left: 3%;
+}
+.sub-content-region table {
+    width:100%;
+}
+.header {
+    float:left;
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -khtml-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    width:96%;
+    padding: 10px 2%;
+    background-color: #afafaf;
+}
+#content-region .sub-content {
+    clear:both;
+    float:left;
+    width: 100%;
+}
+section h1.header {
+    font-size:100%;
+    color:#000;
+}
+.header > span > button {
+    font-size:100%;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    cursor: pointer;
+    color:#fff;
+    margin: 4px 10px 0 0;
+    padding: 0;
+}
+#sub-content-region3 {
+    clear: both; 
+    margin-top:30px;
+    float:left;
+    width: 99%;
+}
+/* index page end */
+
+
+
+/* contents page start */
+
+.content-write-form {
+    float:left;
+    padding : 15px;
+}
+
+.content-write-form .form-rows {
+    clear: both;
+    float: left;
+    width : 100%;
+}
+.content-write-form .form-rows .form-title {
+    clear:both;
+    float: left;
+    width: 15%;
+    line-height:30px;
+}
+.content-write-form .form-rows .form-value {
+    float: left;
+    width: 85%;
+    line-height:30px;
+}
+
+.contents_top_area{
+    position: absolute;
+    top: 5px;
+    right: 7px;
+}
+
+.contents_top_area button{
+    font-size: 100%;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+.contents_top_area2{
+    position: absolute;
+    top: 13px;
+    right: 15px;
+}
+
+.contents_top_area2 button{
+    font-size: 100%;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+.contents_bottom_area{
+    margin-top: 10px;
+}
+
+/* contents page end */
+
+/************************************** 
+ table style start 
+***************************************/
+
+table{
+border-collapse:collapse;
+border:0;
+}
+
+table td{
+	text-align: center;
+	border:1px solid #afafaf;
+	line-height: 2.5em;
+}
+
+table th{
+	background: #eee;
+	border:1px solid #afafaf;
+	line-height: 2em;
+}
+
+table.write_form td{
+	text-align: left;
+	padding: 10px;
+}
+
+table.write_form th{
+	padding: 10px;
+	width: 20%;
+}
+
+table.write_form textarea{
+	width: 99%;
+	height: 50px;
+}
+
+/*lc_sub_search--------------------------
+검색부분 스타일
+-----------------------------------*/
+
+.lc_sub_search{
+	border: 1px solid #ddd;
+        background: #fff;
+        width: 99%;
+        border-radius: 7px;
+        -webkit-border-radius: 7px;
+        -khtml-border-radius: 7px;
+        -moz-border-radius: 7px;
+}
+
+.lc_sub_search form{
+	margin: 10px 20px;
+}
+
+/* ///////////////////////////////////////// 
+	pageing style
+///////////////////////////////////////// */
+
+#content-page-region{
+    margin-right: 5px;
+    top: -6px;
+    line-height: auto;
+}
+
+#content-page-region #pageinfo, #content-page-region #pagelink, #content-page-region #pagelink li{
+    display: inline-block;
+    padding: 0 5px;
+}
+
+#content-page-region #pageinfo{
+    color: #eee;    
+}
+
+#content-page-region #pagelink li a{
+    display: inline-block;
+    margin: 0 1px;
+    width: 20px;
+    height: 10px;
+    padding: 5px 0;
+    border: 1px solid #555;
+    background: #eee;
+    line-height: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+#content-page-region #pagelink li#pagenum a.nowpage{
+    background: red;
+    color: #fff;
+}
+
+#content-page-region #pagelink li#prev a, #content-page-region #pagelink li#next a{
+    background: #555;
+    color: #fff;
+}
+
+/* ///////////////////////////////////////// 
+	input 에 대한 속성
+///////////////////////////////////////// */
+
+input[type=text], input[type=password]{
+    border: 1px solid #ccc;
+    font-size: 100%;
+    padding: 5px;
+    font-family: '나눔고딕', NanumGothic, ng, sans-serif;
+}
+
+button,input[type=submit],input[type=button],input[type=reset]{
+	padding: 5px 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        font-size: 100%;
+        color: #333;
+        font-weight: bold;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -moz-border-radius: 3px;
+        margin-left: 3px;
+}
+
+input[type=radio],input[type=checkbox]{
+        margin-left: 10px;
+}
+
+select{
+    padding:4px;
+    border:1px solid #ccc;
+    font-size: 100%;
+    background: #fff;
+    font-family: '나눔고딕', NanumGothic, ng, sans-serif;
+}
+
+/************************
+ 버튼 스타일
+ ************************/
+.blue_btn{
+    background: #018db8;
+    color: #fff;
+}
+
+span.exsystem_icon{
+    width: 16px;
+    height: 10px;
+    padding: 3px 0 !important;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    font-size: 70%;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+td span.exsystem_icon{
+    display:inline-block;
+    font-size: 70%;
+    margin-right:2px;
+    vertical-align: middle;
+    line-height: 10px;
+}
+
+.exsystem_name{
+    padding: 0 15px 0 3px !important;
+}
+
+.bg_blue{
+    background: dodgerblue;
+    border:none;
+    color:#fff;
+}
+
+.bg_darkblue{
+    background: darkblue;
+    border:none;
+    color:#fff;
+}
+
+.bg_orange{
+    background: orange;
+    border:none;
+    color:#fff;
+}
+
+.bg_green{
+    background: cadetblue;
+    border:none;
+    color:#fff;
+}
+
+.bg_gray {
+    background-color: #656c7e;
+    border:none;
+    color:#fff;
+}
+
+.bg_pink {
+    background-color: #d59392;
+    border:none;
+    color:#fff;
+}
+
+.mark_star{ color: red; font-size: 90%;}
+/************************
+ 로딩스타일
+ ************************/
+
+.loading_modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .5 ) 
+                url('images/loading.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   loading_modal element will be visible */
+body.loading .loading_modal {
+    display: block;
+}
+
+/************************
+ 탭 스타일
+ ************************/
+.tab_area{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.tab_area a{
+    display: inline-block;
+    padding: 5px 20px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -khtml-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    font-weight: bold;
+}
+
+.tab_area a.tab_sel{
+    background: #018db8;
+    color: #fff;
+}
+
+.box_gray{
+    border: 1px solid #ccc;
+    background: #eee;
+    padding: 5px;
+}
+
+.btn_gray{
+    border: 1px solid #ccc;
+    background: #eee;
+    padding: 2px 3px;
+    font-size: 90%;
+}
+
+.display_none{ display:none; }
+
+.upload_frame{ width: 100%; }

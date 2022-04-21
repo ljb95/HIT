@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/evaluation/db" VERSION="2015090800" COMMENT="XMLDB file for Moodle local/evaluation"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+
+    <TABLES>
+        <TABLE NAME="lmsdata_evaluation_forms" COMMENT="평가지양식">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="고유번호" />
+                <FIELD NAME="type" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="평가유형(강의평가:1,설문:2)" />
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="제목" />
+                <FIELD NAME="contents" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="머릿말" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(user->id)" />
+                <FIELD NAME="allow_category" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="카테고리 사용 유무" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation_category" COMMENT="평가지문항의 분류(목차라고 생각)">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="고유번호" />
+                <FIELD NAME="formid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="평가지양식번호(lcmsdata_evaluation_forms->id)" />
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="분류명" />
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="분류순서" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation_questions" COMMENT="평가지문항">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="고유번호" />
+                <FIELD NAME="formid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="평가지양식번호(lmsdata_evaluation_forms->id)" />
+                <FIELD NAME="category" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="분류번호(lmsdata_evaluation_categoriy->id)" />
+                <FIELD NAME="qtype" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="질문유형-선다형(checkbox):1,선다형(radio):2,단답형(input):3,에세이(textarea):4,5점척도(radio):5,점수(input):6)" />
+                <FIELD NAME="expression" TYPE="int" LENGTH="1" NOTNULL="false" DFAULT="0" SEQUENCE="false" COMMENT="표시형식(checkbox,radio일경우)-가로:1,세로:2" />
+                <FIELD NAME="required" TYPE="int" LENGTH="1" NOTNULL="false" DFAULT="0" SEQUENCE="false" COMMENT="필수여부-필수:1,선택:0" />
+                <!--FIELD NAME="minvalue" TYPE="int" LENGTH="10" NOTNULL="false" DFAULT="0" SEQUENCE="false" COMMENT="최소값(선다형checkbox:최소응답수,단답/에세이-최소길이,점수-최저점,0은 제한없음)" />
+                <FIELD NAME="maxvalue" TYPE="int" LENGTH="10" NOTNULL="false" DFAULT="0" SEQUENCE="false" COMMENT="최대값(선다형checkbox:최대응답수,단답/에세이-최대길이,점수-최고점,0은 제한없음)" /-->
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="문항제목" />
+                <FIELD NAME="contents" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="머릿말" />
+                <FIELD NAME="answers" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="문항에대한보기답변(선다형일경우보기답변필요)" />
+                <FIELD NAME="etc" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="기타답변(input)-1:텍스트,2:점수,0:기타없음)" />
+                <FIELD NAME="etcname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="기타항목명" />
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="문항순서" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation" COMMENT="강의평가/설문게시">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="고유번호" />
+                <FIELD NAME="type" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="평가유형(강의평가:1,설문:2)" />
+                <FIELD NAME="formid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="평가지양식번호(lmsdata_evaluation_forms->id)" />
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="강의번호(course->id)" />
+                <FIELD NAME="targets" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" COMMENT="평가대상(1:교과목,2:교수,3:임상실습,설문일경우-콤마로 구분하여 여러개 입력)" />
+                <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가시작일" />
+                <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가종료일" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(user->id)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+                <FIELD NAME="compulsion" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="강제설문 여부(1:활성, 0:비활성)" />.
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation_submits" COMMENT="강의평가/설문완료확인">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="evaluation" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의평가게시번호(lmsdata_evaluation->id/lmsdata_survey->id)" />
+                <FIELD NAME="questions" TYPE="text" LENGTH="small" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="답변한번호(콤마로구분)" />
+                <FIELD NAME="completion" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="완료여부(0:미완료,1:완료)" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(user->id)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가일" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation_answers" COMMENT="강의평가응답">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의번호(course->id)" />
+                <FIELD NAME="evaluation" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의평가게시번호(lmsdata_evaluation->id)" />
+                <FIELD NAME="question" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="평가지질문번호(lmsdata_evaluation_questions->id)" />
+                <FIELD NAME="answers" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" COMMENT="질문에대한응답" />
+                <FIELD NAME="etcanswers" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="기타에대한응답" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(user->id)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가일" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_survey_answers" COMMENT="설문조사응답">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="evaluation" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의평가게시번호(lmsdata_evaluation->id)" />
+                <FIELD NAME="question" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="평가지질문번호(lmsdata_evaluation_questions->id)" />
+                <FIELD NAME="answers" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" COMMENT="질문에대한응답" />
+                <FIELD NAME="etcanswers" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="기타에대한응답" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(m_user->id)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가일" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="lmsdata_evaluation_history" COMMENT="History of Evaluation">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="evaluation" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의평가게시번호(lmsdata_evaluation->id)" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="등록/수정자(m_user->id)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가일" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="평가수정일" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+
+</XMLDB>

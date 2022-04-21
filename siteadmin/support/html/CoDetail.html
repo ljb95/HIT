@@ -1,0 +1,98 @@
+<nav class="lc_tab clearfix">
+<h1>콘텐츠 유형 링크 탭</h1>
+</nav>
+
+<section id="lc_contents">
+<!--콘텐츠등록-->
+<form method="post" name="update_form" enctype="multipart/form-data">
+
+<input type="hidden" name="amode" value="reg_con"/>
+<input type="hidden" name="locat" value="write"/>
+<input type="hidden" name="con_seq"/>
+<input type="hidden" name="sel1"/>
+<input type="hidden" name="sel2"/>
+<input type="hidden" name="sel3"/>
+
+<table border="1" class="write_form">
+<caption>공통 콘텐츠 등록 영역</caption>
+<tr>
+<th><?php echo get_string('stats_classification', 'local_lmsdata'); ?> <span class="mark_star">*</span></th>
+<td>
+<select name="area_cd"><option value="">1차분류</option></select>
+<select name="major_cd"><option value="">2차분류</option></select>
+<select name="course_cd"><option value="">3차분류</option></select>
+</td>
+</tr>
+<tr>
+<th><?php echo get_string('contents_contentname', 'local_lmsdata'); ?> <span class="mark_star">*</span></th>
+<td>
+<input type="text" name="con_name" size="50" required /> <span class="gray_text">* 50자까지 입력 가능</span>
+</td>
+</tr>
+<tr>
+<th><?php echo get_string('contents_lecturer', 'local_lmsdata'); ?> </th>
+<td>
+<input type="text" name="teacher" size="30"/> <span class="gray_text">* 30자까지 입력 가능	</span>
+</td>
+</tr>
+<tr>
+<th><?php echo get_string('contents_writer', 'local_lmsdata'); ?> </th>
+<td>
+<input type="text" name="" size="30" maxlength="30"/> <span class="gray_text"> * 30자 까지 입력 가능</span>
+</td>
+</tr>
+<tr>
+<th><?php echo get_string('contents_showauthor', 'local_lmsdata'); ?> <span class="mark_star">*</span></th>
+<td>
+<input type="radio" name="cc_type" value="1" checked /> <?php echo get_string('contents_nocopyright', 'local_lmsdata'); ?>
+<input type="radio" name="cc_type" value="2"/> 저작권표시
+<input type="radio" name="cc_type" value="3"/> 카피라이트
+
+<div id="cc_type1" class="box_gray">
+- <?php echo get_string('contents_nocopyright', 'local_lmsdata'); ?>
+</div>
+<div id="cc_type2" class="box_gray display_none">
+- 저작물의 변경을 허락합니까?
+<input type="radio" name="cc_mark1" value=""/> 예
+<input type="radio" name="cc_mark1" value="ND"/> 아니오
+<input type="radio" name="cc_mark1" value="SA"/> 동일조건 하에 허용
+<br/>
+- 영리목적 이용을 허락합니까?
+<input type="radio" name="cc_mark2" value=""/> 예
+<input type="radio" name="cc_mark2" value="NC"/> 아니오
+</div>
+<div id="cc_type3" class="box_gray display_none">
+<input type="text" name="cc_text" size="70" placeholder="카피라이트를 입력하세요."/>
+</div>
+
+</td>
+</tr>
+<tr>
+<th><?php echo get_string('contents_visibility', 'local_lmsdata'); ?> <span class="mark_star">*</span></th>
+<td>
+<input type="radio" name="share_yn" value="1" checked/> LMS
+<input type="radio" name="share_yn" value="2"/> OCW
+<input type="radio" name="share_yn" value="3"/> <?php echo get_string('contents_open', 'local_lmsdata'); ?>
+<input type="radio" name="share_yn" value="N"/> <?php echo get_string('contents_private', 'local_lmsdata'); ?>
+</td>
+</tr>
+<tr>
+<th>콘텐츠설명</th>
+<td>
+<textarea name="con_des" rows="7"></textarea>
+</td>
+</tr>
+</table>
+
+<br/>
+
+<div id="con_form"></div>
+
+<div class="box_center">
+<input type="button" id="btnContinue" value="연속등록하기"/>
+<input type="button" id="btnUpdate" value="완료하기"/>
+<input type="reset" id="btnReset" value="초기화"/>
+</div>
+
+</form>
+</section>

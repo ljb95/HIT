@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/haksa/db" VERSION="2012070600" COMMENT="XMLDB file for Moodle local/haksa"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+
+    <TABLES>
+        <TABLE NAME="haksa" COMMENT="학사 동기화 정보">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="year" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="년도" />
+                <FIELD NAME="term" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="학기" />
+                <FIELD NAME="timesynccourse" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="학사에서 가져온 날짜" />
+                <FIELD NAME="timesyncparticipant" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="학사에서 가져온 날짜" />
+                <FIELD NAME="timecreatecourse" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="무들 강의 생성 날짜" />
+                <FIELD NAME="timeassignparticipant" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="강의 사용자 등록 날짜" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="haksa_class" COMMENT="학사에서 가져온 강의">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="haksa" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="domain" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="year" TYPE="char" LENGTH="4" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="term" TYPE="char" LENGTH="2" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="hakno" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="bb" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="sbb" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="ohakkwa" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="kor_lec_name" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="eng_lec_name" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="summary" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="학습목표. course->summary" />
+                <FIELD NAME="hakjum" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="gubun" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="cata1" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="cata2" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="cata3" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="cata1_eng" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="cata2_eng" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="cata3_eng" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="prof_name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="prof_cd" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="lec_cd" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+                <FIELD NAME="hyear" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="day_tm_cd" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="shortname" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="course->shortname, 강의 생성 시 업데이트"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="year" UNIQUE="false" FIELDS="year"/>
+                <INDEX NAME="term" UNIQUE="false" FIELDS="term"/>
+                <INDEX NAME="deleted" UNIQUE="false" FIELDS="deleted"/>
+                <INDEX NAME="year-ohakkwa" UNIQUE="false" FIELDS="year, term, hakno, bb, sbb, ohakkwa"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="haksa_class_student" COMMENT="강의에 동록된 학생">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="haksa" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="domain" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="year" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="term" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="hakno" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="bb" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="sbb" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="ohakkwa" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="lec_cd" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="kor_lec_name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="eng_lec_name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="prof_name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="hakbun" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="year" UNIQUE="false" FIELDS="year"/>
+                <INDEX NAME="term" UNIQUE="false" FIELDS="term"/>
+                <INDEX NAME="year-ohakkwa" UNIQUE="false" FIELDS="year, term, hakno, bb, sbb, ohakkwa"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="haksa_class_delete" COMMENT="강의 삭제 설정">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="haksa" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="year" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="term" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="type" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="삭제 타입" />
+                <FIELD NAME="ohakkwa" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="삭제할 과목코드" />
+                <FIELD NAME="hakno" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="삭제할 학정번호-분반" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="year" UNIQUE="false" FIELDS="year"/>
+                <INDEX NAME="term" UNIQUE="false" FIELDS="term"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="haksa_class_student_change" COMMENT="강의에 동록된 학생 변경">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="haksa" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="year" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="term" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="type" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="변경 타입" />
+                <FIELD NAME="ohakkwa" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="변경할 과목코드" />
+                <FIELD NAME="target_subjectid_1" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="변경할 학정번호-분반" />
+                <FIELD NAME="target_subjectid_2" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="변경할 학정번호-분반" />
+                <FIELD NAME="target_subjectid_3" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="제외할 학정번호-분반, ','로 구분" />
+                <FIELD NAME="domain" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="새 대학코드" />
+                <FIELD NAME="subjectid" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="새 학정번호-분반" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="year" UNIQUE="false" FIELDS="year"/>
+                <INDEX NAME="term" UNIQUE="false" FIELDS="term"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="haksa_class_professor" COMMENT="강의에 등록된 교수">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="haksa" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="domain" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="year" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="term" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="hakno" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="bb" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="lec_cd" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="prof_name" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="prof_cd" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="year" UNIQUE="false" FIELDS="year"/>
+                <INDEX NAME="term" UNIQUE="false" FIELDS="term"/>
+                <INDEX NAME="year-bb" UNIQUE="false" FIELDS="year, term, hakno, bb"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="haksa_user_history" COMMENT="사용자 동기화 기록">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="usercount" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="haksa_cron" COMMENT="학사 동기화 정보">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="hour" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="시간" />
+                <FIELD NAME="totalcount" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="동기화 총 갯수" />
+                <FIELD NAME="usingcount" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="실행된 횟 수 " />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+
+</XMLDB>

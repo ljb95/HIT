@@ -1,0 +1,118 @@
+
+input[type="button"]{ cursor: pointer; }
+
+#page-local-board-index .isnotice {
+    background: #dedede;
+}
+
+#page-local-board-index .board-list-area{
+    clear: both;
+}
+
+#page-local-board-index .board-list-area .board-list{
+    margin: 0;
+}
+
+#page-local-board-index .board-list-area .board-list li{
+    clear: both;
+    list-style: none;
+    border: 1px solid #aaa;
+    padding: 20px;
+    margin-bottom: 5px;
+}
+
+#page-local-board-index .table-header-area{
+    float: left;
+}
+
+#page-local-board-index .table-filter-area{
+    float: left;
+}
+
+#page-local-board-index .table-filter-area form{
+    text-align: right;
+}
+
+#page-local-board-index .table-search-option .search-text{
+    width: 200px;
+}
+
+#page-local-board-index .post-title{
+    font-size: 110%;
+    font-weight: bold;
+}
+
+#page-local-board-index .post-date{
+    font-size: 90%;
+    color: #999;
+}
+
+#page-local-board-index .post-picture{
+    float:left;
+    margin-right: 10px;
+}
+
+#page-local-board-index .post-title img{
+    margin-right: 5px;
+    vertical-align: bottom;
+}
+
+#page-local-board-index .post-viewinfo{
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -20px;
+}
+
+#page-local-board-content .detail-title-area{
+    padding: 10px 0;
+    margin-top: 5px; 
+}
+
+#page-local-board-content .detail-title{
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#page-local-board-content .detail-date{
+    margin-right: 5px;
+    font-size: 90%;
+    color: #999;
+}
+
+#page-local-board-content .detail-contents{
+    clear: both;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+#page-local-board-content .detail-attachment-area{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+   padding: 18px 0;
+   background: #eee;
+}
+
+#page-local-board-content .detail-attachment-title{
+    padding: 20px;
+    background: #049cdb;
+    color: #fff;
+    font-weight: bold;
+}
+
+#page-local-board-content .detail-attachment{
+    padding: 20px;
+}
+
+#page-local-board-content .detail-viewinfo{
+    font-size: 110%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -15px;
+    margin-right: 20px;
+}
+
+#page-local-board-write .detail {
+    float: left;
+}

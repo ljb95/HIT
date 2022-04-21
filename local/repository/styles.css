@@ -1,0 +1,380 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015. 2. 27, 오전 10:50:37
+    Author     : 임종범
+*/
+
+#vodquality {
+    position: absolute;
+    left: 50% !important;
+    top: 50% !important;
+    color: #FFF;
+    width: auto !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%);
+}
+
+#vodquality a.blue_btn {
+    padding: 8px 0;
+    width: 120px;
+    display: block;
+    float: left;
+    text-align: center;
+    color: #fff;
+    font-size: 15px !important;
+    margin: 0px 10px;
+    border: 2px solid rgb(237, 85, 101);
+    border-radius: 2px;
+    background-color: #ed5565;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 6px #676767;
+}
+#vodquality a.orange_btn {
+    margin: 0px 10px;
+    padding: 8px 0;
+    width: 120px;
+    display: block;
+    float: left;
+    text-align: center;
+    background-color: #E8920C;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 15px !important;
+    border: 2px solid rgb(232, 146, 12);
+    font-family: sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 6px #676767;
+}
+#vodquality a.blue_btn:hover {
+    background-color: #c33241;
+    border: 2px solid #c33241;
+}
+#vodquality .full { 
+    margin-left:80px !important;
+}
+#vodquality a.orange_btn:hover {
+    background-color: #b3740c;
+    border: 2px solid #b3740c;
+}
+
+#success {
+    padding: 0;
+    margin: 0; 
+}
+
+#fgroup_id_embedgroup, #fgroup_id_videogroup, #fgroup_id_attachmentsgroup,  #fgroup_id_mediaidgroup{
+    display: none;
+}
+
+.detail-contents-area{
+    border-bottom: 1px solid #ccc;
+    padding-top: 0 !important;
+    min-height: 30px;
+}
+
+.detail-contents-area ul{
+    margin: 3px;
+}
+
+.detail-contents-area ul li{
+    list-style: none;
+    padding: 5px;
+}
+
+#lcms_upload_component .files, #fgroup_id_staygroup .cfiles{
+    clear: both;
+    margin: 5px 0;
+}
+
+#lcms_upload_component .files li, #fgroup_id_staygroup .cfiles li{
+    padding: 5px 0;
+    list-style: none;
+}
+
+#lcms_upload_component .files li button.delete, #lcms_upload_component .files li button.cancel, #fgroup_id_staygroup .cfiles li button.delete{
+    padding: 2px 3px !important;
+    float: right;
+    cursor: pointer;
+}
+#lcms_upload_component .fileinput-button {
+    width : 100px !important;
+    float: left !important;
+    text-align: center;
+    margin-right: 10px !important;
+}
+
+@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
+@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
+@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
+.progress{height:20px;margin-bottom:20px;overflow:hidden;background-color:#f5f5f5;border-radius:4px;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+.progress-bar{float:left;width:0;height:100%;font-size:12px;line-height:20px;color:#fff;text-align:center;background-color:#337ab7;-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);-webkit-transition:width .6s ease;-o-transition:width .6s ease;transition:width .6s ease}
+.progress-bar-striped,.progress-striped .progress-bar{background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);-webkit-background-size:40px 40px;background-size:40px 40px}
+.progress-bar.active,.progress.active .progress-bar{-webkit-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite}
+.progress-bar-success{background-color:#5cb85c}
+.progress-striped .progress-bar-success{background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)}
+.progress-bar-info{background-color:#5bc0de}
+.progress-striped .progress-bar-info{background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)}
+.progress-bar-warning{background-color:#f0ad4e}
+.progress-striped .progress-bar-warning{background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)}
+.progress-bar-danger{background-color:#d9534f}
+.progress-striped .progress-bar-danger{background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)}
+
+#lcms_upload_component .progress {
+    width : calc(100% - 100px)-30px; 
+}
+
+#vodimage{
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#vodimage2{
+    width: 100%;
+    height: 100%;
+    background: #000;
+    left: 0;
+    top: 0;
+}
+
+#vodimage img , #vodimage2 img{
+    width:100%;
+    height:99%;
+    border:0;
+}
+
+
+iframe#vod_viewer{
+    width:100%;height:525px;border:0;overflow:hidden;
+}
+
+video{
+    background: #000;
+    width: 100%;
+    height: 100%;
+}
+
+div#vodplayer {
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+@media all and (max-width:768px) {
+    iframe#vod_viewer{
+        /*height: 350px;*/
+    }
+}
+
+@media all and (max-width:480px) {
+    iframe#vod_viewer{
+        /*height: 200px;*/
+    }
+}
+#page-local-repository-ocx #content-region{
+    padding:0px !important;
+    width:100% !important;
+}
+
+/* CDMS */
+.small_block_cdms {
+    float:left;
+    width:29%;
+    height: 135px;
+    background-color:white;
+    padding: 1%;
+    margin: 1%;
+    box-shadow: 0px 1px 3px #ddd;
+    border:1px solid #ccc;
+    overflow: auto;
+}
+.linestar {
+    clear: both;
+}
+.block_header_cdms {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    height: 24px; 
+    padding: 5px 8px;
+}
+.half_block_cdms {
+    float:left;
+    width:45.6%;
+    padding: 1%;
+    margin: 1%;
+    height: 240px;
+    background-color:white;
+    box-shadow: 0px 1px 3px #ddd;
+    border:1px solid #ccc;
+    overflow: auto;
+}
+.full_block_cdms {
+    clear: both;
+    float:left;
+    width:95.6%;
+    height: auto;
+    background-color:white;
+    padding: 1%;
+    margin: 1%;
+    box-shadow: 0px 1px 3px #ddd;
+    border:1px solid #ccc;
+}
+.plus_btn {
+    float: right;
+    padding-right: 5px;
+    color: #aaa;
+    font-size: 25px;
+}
+.filemanager-toolbar {
+    margin-top: 9px;
+}
+@media all and (max-width: 768px) {
+    .full_block_cdms,.half_block_cdms,.small_block_cdms {
+        width:97% !important;
+    }
+    #contents_file {
+        width:96% !important;
+    }
+}
+
+.cdms_conname_short {
+    table-layout: fixed;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    width:150px;
+}
+
+.cdms_icons{
+    padding: 5px;
+}
+
+.caption #captionpopup {
+    margin-left: 30px !important;
+}
+
+div[aria-describedby="caption_popup"] button[type="button"] {
+/*    margin: 0px !important;
+    padding: 0px !important;
+    height: auto !important;*/
+}
+div[aria-describedby="load_form"] {
+    z-index: 6000 !important;
+}
+
+#video_frame {
+    border:0;
+}
+#page-local-repository-write input[type="text"] {
+    height:30px;
+}
+#page-local-repository-write #id_emb_type { 
+    float:left; margin-right: 3px;
+}
+#page-local-repository-index select {
+    margin-bottom:0;
+}
+/*youtube팝업*/
+div[aria-describedby="load_form"], #mod_lcms_contents{
+    padding: 0 !important; 
+    border-color: #ccc !important;
+}  
+.ui-dialog .ui-dialog-content{padding: 0 !important;}
+.ui-widget-header{
+    border: 0 !important;     
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0px !important; 
+}  
+.ui-widget input{border-radius: 2px;}
+
+#load_form.ui-widget-content > div, iframe div, .test{
+    width: 100% !important;
+    padding: 15px;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+} 
+#load_form.ui-widget-content > div[id *= yui]{border: 0;}
+#load_form.ui-widget-content > div[id *= yui] input{margin: 5px 0 0 0 !important;}
+.embed_thumbnail{margin-right: 10px !important;}
+.embed_select{margin-top: 5px !important;}
+.embed_select input[type=button]{
+    margin: 0 !important;
+    background: #eee; 
+}
+#lcms_upload_component {
+    width: 100%;
+}
+
+#embed_tab div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+#embed_tab div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+#embed_tab div.tab button:hover {
+    background-color: #ddd;
+}
+#embed_tab div.tab button.active {
+    background-color: #ccc;
+}
+
+#embed_tab .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+.tabcontent {
+    -webkit-animation: fadeEffect_et 1s;
+    animation: fadeEffect_et 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect_et {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect_et {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.group_control_popup {
+    display: none;
+}
+.likey{
+    background-image: url('./pix/likeafter_pix.png');
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    background-color: #316ede;
+}
+.like{
+    background: #316ede url('./pix/likeafter_pix.png') no-repeat center left;
+}
+.like2{
+    background: url('./pix/likebefore_pix.png') no-repeat center left;
+}
+.writer {
+    float:right; padding-right:1%; font-weight:normal; font-size:14px;
+}

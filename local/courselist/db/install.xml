@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/courselist/db" VERSION="2016080901" COMMENT="XMLDB file for Moodle local/courselist"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="lmsdata_class_drive_log" COMMENT="분반몰아넣기 로그">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+        <FIELD NAME="standard_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="기준 course id"/>
+        <FIELD NAME="subject_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="대상 course id"/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="실행한 user id"/>
+        <FIELD NAME="invisible" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="대상 course invisible(보이지 않게 설정하면 1)"/>
+        <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" COMMENT="몰아넣기(0), 분반몰아넣기(1)"/>
+        <FIELD NAME="restore_flag" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="되돌리기 하면 1"/>
+        <FIELD NAME="restore_user_id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="되돌리기 user id"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timerestore" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="course_irregular_complete" COMMENT="비교과과정 이수">
+        <FIELDS>
+          <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+          <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="무들강의번호(course->id)"/>
+          <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="회원번호(user->id)"/>
+          <FIELD NAME="complete" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="미이수(0), 이수(1)"/>
+          <FIELD NAME="grade" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="점수"/>
+          <FIELD NAME="department" TYPE="char" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="주관부서 : 교수학습지원센터(0), 기타(1), 학부과(2)"/>
+          <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+          <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+        </FIELDS>
+        <KEYS>
+          <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+      </TABLE>
+      
+      <TABLE NAME="certificate_log" COMMENT="이수증 로그">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="고유번호"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="강의아이디"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="유저아이디"/>
+        <FIELD NAME="username" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="유저이름"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+      
+  </TABLES>
+</XMLDB>

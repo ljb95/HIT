@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/offline_attendance/db" VERSION="20131122" COMMENT="XMLDB file for Moodle local/offline_attendance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="local_off_attendance" COMMENT="오프라인 출석부 정보, 강의별로 강의생성시 만들어짐" NEXT="local_off_attendance_section">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="courseid"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="itemid" COMMENT="코스 id"/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="courseid" NEXT="userid" COMMENT="grade_items 테이블의 id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" DEFAULT="0" NOTNULL="true" SEQUENCE="false" PREVIOUS="itemid" NEXT="latesubtract" COMMENT="user id, 0이면 system에 의해 만들어진것"/>
+                <FIELD NAME="latesubtract" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" PREVIOUS="userid" NEXT="absentsubtract" COMMENT="지각 차감"/>
+                <FIELD NAME="absentsubtract" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="latesubtract" NEXT="earlysubtract" COMMENT="결석차감"/>
+                <FIELD NAME="earlysubtract" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="absentsubtract" NEXT="timemodified" COMMENT="조퇴차감"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="earlysubtract" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_off_attendance_section" COMMENT="오프라인 출석부 섹션정보" NEXT="local_off_attendance_status">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="courseid"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid" COMMENT="코스 id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="courseid" NEXT="code" COMMENT="자동출석버튼을 누른 교수 user id"/>
+                <FIELD NAME="code" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="userid" NEXT="timestart" COMMENT="인증번호 : 동일course에서는 겹치지않음"/>
+                <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="code" NEXT="timeend" COMMENT="자동출결 시작시간"/>
+                <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="timestart" NEXT="timedate" COMMENT="자동출결 종료시간"/>
+                <FIELD NAME="timedate" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timeend" COMMENT="출결날짜, 겹칠수 있음, 해당날짜 00시00분00초 unixtime"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_off_attendance_status" COMMENT="오프라인 출석부 학생 출결상황" NEXT="local_off_attendance_log">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="courseid"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="sectionid" COMMENT="코스 id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="sectionid" NEXT="status" COMMENT="출결 userid"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" PREVIOUS="userid" NEXT="lastcode" COMMENT="상태(0:최초상태 또는 초기화, 1:출석, 2:결석, 3:지각, 4:조퇴 )"/>
+                <FIELD NAME="lastcode" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="status" NEXT="timedate" COMMENT="마지막 입력 code"/>
+                <FIELD NAME="timedate" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="lastcode"  NEXT="timecreated" COMMENT="출결날짜, 겹칠수 없음, 해당날짜 00시00분00초 unixtime"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timedate" NEXT="timemodified" COMMENT="만들어진시간"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timecreated" COMMENT="변경된시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_off_attendance_log" COMMENT="오프라인 출석부 학생 출결로그" >
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="statusid"/>
+                <FIELD NAME="statusid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid" COMMENT="local_off_attendance_status 의 id"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="sectionid" NEXT="ostatus" COMMENT="변경 user, 0이면 시스템에 의해 변경"/>
+                <FIELD NAME="ostatus" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" PREVIOUS="userid" NEXT="nstatus" COMMENT="이전상태(1:출석, 2:결석, 3:지각, 4:조퇴 )"/>
+                <FIELD NAME="nstatus" TYPE="int" LENGTH="2" NOTNULL="false" SEQUENCE="false" PREVIOUS="ostatus" NEXT="timecreated" COMMENT="변경상태(1:출석, 2:결석, 3:지각, 4:조퇴 )"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="nstatus" COMMENT="만들어진시간"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>
